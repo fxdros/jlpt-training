@@ -56,5 +56,28 @@ Kolom:
 - ✅ Hasil + review jawaban salah di akhir sesi
 - ✅ Soal berbeda setiap sesi (seed berbasis waktu)
 
+## Improvement Ideas
+
+Fitur-fitur berikut direncanakan untuk pengembangan ke depan:
+
+### 🗒️ Latihan Tata Bahasa (Grammar)
+- Soal pilihan ganda untuk pola kalimat dan tata bahasa JLPT N2
+- Contoh kalimat dengan bagian yang dikosongkan (fill-in-the-blank)
+- Penjelasan singkat mengapa jawaban benar/salah setelah sesi selesai
+
+### 📖 Latihan Reading (Membaca)
+- Teks bacaan pendek khas soal JLPT N2
+- Soal pemahaman bacaan (comprehension questions)
+- Timer yang disesuaikan dengan panjang teks
+
+### 📊 Statistik & Progress Tracking
+- Riwayat sesi latihan tersimpan di local storage
+- Grafik perkembangan skor dari waktu ke waktu
+- Highlight kosakata/grammar yang sering salah
+
+### 🔖 Sistem Bookmark
+- Tandai vocab atau grammar yang sulit untuk dilatih ulang
+- Mode latihan khusus untuk item yang di-bookmark
+
 ## Credits
 Built with the assistance of Claude Code (through Japan AI Assistant).
