@@ -1,6 +1,6 @@
-# JLPT N2 Quiz App
+# JLPT Quiz App
 
-Web app latihan kosakata dan kanji JLPT N2 berbasis Next.js + TypeScript.
+Web app latihan kosakata dan kanji JLPT berbasis Next.js + TypeScript.
 
 ## Cara Menjalankan
 
