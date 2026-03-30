@@ -55,3 +55,6 @@ Kolom:
 - ✅ Timer 25 menit dengan warning visual
 - ✅ Hasil + review jawaban salah di akhir sesi
 - ✅ Soal berbeda setiap sesi (seed berbasis waktu)
+
+## Credits
+Built with the assistance of Claude Code (through Japan AI Assistant).
