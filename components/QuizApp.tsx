@@ -1,65 +1,60 @@
-"use client";
+'use client';
 
-import { VocabItem } from "@/lib/csvParser";
-import { useQuiz } from "@/lib/useQuiz";
-import StartScreen from "./StartScreen";
-import QuestionCard from "./QuestionCard";
-import ResultScreen from "./ResultScreen";
-import Timer from "./Timer";
+import { GoiItem, KanjiItem } from '@/lib/csvParser';
+import { useQuiz } from '@/lib/useQuiz';
+import { QuizMode } from '@/lib/quizEngine';
+import StartScreen from './StartScreen';
+import QuestionCard from './QuestionCard';
+import ResultScreen from './ResultScreen';
+import Timer from './Timer';
 
 interface Props {
-  vocabulary: VocabItem[];
+  goiVocab: GoiItem[];
+  kanjiList: KanjiItem[];
 }
 
-export default function QuizApp({ vocabulary }: Props) {
-  const quiz = useQuiz(vocabulary);
+export default function QuizApp({ goiVocab, kanjiList }: Props) {
+  const { state, startQuiz, answerQuestion, finishQuiz, resetQuiz } = useQuiz(goiVocab, kanjiList);
+  const { status, questions, currentIndex, answers } = state;
 
-  if (quiz.phase === "start") {
-    return <StartScreen onStart={quiz.startSession} />;
-  }
-
-  if (quiz.phase === "result") {
-    return (
-      <ResultScreen
-        score={quiz.score}
-        totalQuestions={quiz.totalQuestions}
-        wrongAnswers={quiz.wrongAnswers}
-        allAnswers={quiz.answers}
-        onRestart={quiz.restartSession}
-      />
-    );
-  }
-
-  // phase === "quiz"
   return (
-    <div className="min-h-screen bg-slate-900 flex flex-col items-center py-8 px-4">
-      {/* Header */}
-      <div className="w-full max-w-2xl flex items-center justify-between mb-6">
-        <div className="text-slate-400 text-sm font-medium">
-          Soal{" "}
-          <span className="text-white font-bold text-lg">
-            {quiz.currentIndex + 1}
-          </span>
-          <span className="text-slate-500"> / {quiz.totalQuestions}</span>
-        </div>
-        <Timer timeLeft={quiz.timeLeft} />
-      </div>
-
-      {/* Progress bar */}
-      <div className="w-full max-w-2xl bg-slate-700 rounded-full h-2 mb-8">
-        <div
-          className="bg-indigo-500 h-2 rounded-full transition-all duration-300"
-          style={{
-            width: `${((quiz.currentIndex) / quiz.totalQuestions) * 100}%`,
-          }}
+    <div className="min-h-screen bg-slate-900 text-white flex flex-col items-center justify-center p-4">
+      {status === 'idle' && (
+        <StartScreen
+          onStart={startQuiz}
+          totalGoi={goiVocab.length}
+          totalKanji={kanjiList.length}
         />
-      </div>
+      )}
 
-      {/* Question */}
-      {quiz.currentQuestion && (
-        <QuestionCard
-          question={quiz.currentQuestion}
-          onSelect={quiz.selectAnswer}
+      {status === 'running' && questions.length > 0 && (
+        <div className="w-full max-w-2xl flex flex-col gap-4">
+          <div className="flex justify-between items-center">
+            <span className="text-slate-400 text-sm">
+              Soal {currentIndex + 1} / {questions.length}
+            </span>
+            <Timer duration={25 * 60} onTimeUp={finishQuiz} />
+          </div>
+
+          <div className="w-full bg-slate-700 rounded-full h-2">
+            <div
+              className="bg-indigo-500 h-2 rounded-full transition-all"
+              style={{ width: `${((currentIndex + 1) / questions.length) * 100}%` }}
+            />
+          </div>
+
+          <QuestionCard
+            question={questions[currentIndex]}
+            onSelect={answerQuestion}
+          />
+        </div>
+      )}
+
+      {status === 'finished' && (
+        <ResultScreen
+          questions={questions}
+          answers={answers}
+          onRestart={resetQuiz}
         />
       )}
     </div>

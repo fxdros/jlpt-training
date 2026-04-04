@@ -1,12 +1,14 @@
-import fs from "fs";
-import path from "path";
-import QuizApp from "@/components/QuizApp";
-import { parseCSV } from "@/lib/csvParser";
+import fs from 'fs';
+import path from 'path';
+import QuizApp from '@/components/QuizApp';
+import { parseGoiCSV, parseKanjiCSV } from '@/lib/csvParser';
 
 export default function Home() {
-  const csvPath = path.join(process.cwd(), "data", "vocabulary.csv");
-  const csvContent = fs.readFileSync(csvPath, "utf-8");
-  const vocabulary = parseCSV(csvContent);
+  const goiPath = path.join(process.cwd(), 'data', 'goi.csv');
+  const kanjiPath = path.join(process.cwd(), 'data', 'kanji.csv');
 
-  return <QuizApp vocabulary={vocabulary} />;
+  const goiVocab = parseGoiCSV(fs.readFileSync(goiPath, 'utf-8'));
+  const kanjiList = parseKanjiCSV(fs.readFileSync(kanjiPath, 'utf-8'));
+
+  return <QuizApp goiVocab={goiVocab} kanjiList={kanjiList} />;
 }

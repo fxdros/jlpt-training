@@ -1,23 +1,41 @@
-export interface VocabItem {
-  word: string;
-  reading: string;
-  meaning: string;
+export interface GoiItem {
+  word: string;    // kanji (bisa kosong untuk pure hiragana)
+  reading: string; // furigana
+  meaning: string; // arti bahasa Inggris
 }
 
-export function parseCSV(content: string): VocabItem[] {
-  const lines = content.trim().split("\n");
-  // skip header
+export interface KanjiItem {
+  kanji: string;   // karakter kanji
+  reading: string; // cara baca
+}
+
+export function parseGoiCSV(csvText: string): GoiItem[] {
+  const lines = csvText.trim().split('\n');
   const dataLines = lines.slice(1);
 
   return dataLines
     .map((line) => {
-      const parts = line.split(",");
-      if (parts.length < 3) return null;
+      const parts = line.split(',');
       return {
-        word: parts[0].trim(),
-        reading: parts[1].trim(),
-        meaning: parts.slice(2).join(",").trim(),
+        word: parts[0]?.trim() ?? '',
+        reading: parts[1]?.trim() ?? '',
+        meaning: parts[2]?.trim() ?? '',
       };
     })
-    .filter((item): item is VocabItem => item !== null);
+    .filter((item) => item.reading && item.meaning);
+}
+
+export function parseKanjiCSV(csvText: string): KanjiItem[] {
+  const lines = csvText.trim().split('\n');
+  const dataLines = lines.slice(1);
+
+  return dataLines
+    .map((line) => {
+      const [kanji, reading] = line.split(',');
+      return {
+        kanji: kanji?.trim() ?? '',
+        reading: reading?.trim() ?? '',
+      };
+    })
+    .filter((item) => item.kanji && item.reading);
 }

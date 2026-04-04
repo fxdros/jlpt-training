@@ -1,57 +1,57 @@
-"use client";
+'use client';
+
+import { QuizMode } from '@/lib/quizEngine';
 
 interface Props {
-  onStart: () => void;
+  onStart: (mode: QuizMode) => void;
+  totalGoi: number;
+  totalKanji: number;
 }
 
-export default function StartScreen({ onStart }: Props) {
+export default function StartScreen({ onStart, totalGoi, totalKanji }: Props) {
   return (
-    <div className="min-h-screen bg-slate-900 flex flex-col items-center justify-center px-4">
-      <div className="text-center max-w-lg">
-        {/* Badge */}
-        <div className="inline-block bg-indigo-600 text-white text-xs font-bold px-3 py-1 rounded-full mb-6 tracking-widest uppercase">
-          JLPT N2
-        </div>
+    <div className="flex flex-col items-center gap-8 text-center max-w-lg w-full">
+      <div>
+        <h1 className="text-4xl font-bold text-white mb-2">JLPT N2 Quiz</h1>
+        <p className="text-slate-400">Pilih mode latihan yang ingin kamu mulai</p>
+      </div>
 
-        {/* Title */}
-        <h1 className="text-4xl font-bold text-white mb-2">
-          語彙・漢字クイズ
-        </h1>
-        <p className="text-slate-400 text-lg mb-8">
-          Latihan Kosakata &amp; Kanji JLPT N2
-        </p>
-
-        {/* Info cards */}
-        <div className="grid grid-cols-3 gap-4 mb-10">
-          <div className="bg-slate-800 rounded-xl p-4">
-            <div className="text-2xl font-bold text-indigo-400">50</div>
-            <div className="text-slate-400 text-sm mt-1">Soal</div>
-          </div>
-          <div className="bg-slate-800 rounded-xl p-4">
-            <div className="text-2xl font-bold text-indigo-400">25</div>
-            <div className="text-slate-400 text-sm mt-1">Menit</div>
-          </div>
-          <div className="bg-slate-800 rounded-xl p-4">
-            <div className="text-2xl font-bold text-indigo-400">4</div>
-            <div className="text-slate-400 text-sm mt-1">Pilihan</div>
-          </div>
-        </div>
-
-        {/* Rules */}
-        <div className="bg-slate-800 rounded-xl p-5 text-left mb-8 text-sm text-slate-300 space-y-2">
-          <p>📝 Ada 2 jenis soal: <strong>JP → ID</strong> dan <strong>ID → JP</strong></p>
-          <p>⏱️ Waktu 25 menit — jika habis, sesi otomatis selesai</p>
-          <p>✅ Hasil dan review jawaban salah ditampilkan di akhir</p>
-          <p>🔀 Soal diacak setiap sesi baru</p>
-        </div>
-
-        {/* Start button */}
+      <div className="grid grid-cols-1 gap-4 w-full">
+        {/* Goi Mode */}
         <button
-          onClick={onStart}
-          className="w-full bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-700 text-white font-bold text-lg py-4 rounded-xl transition-colors duration-200 shadow-lg shadow-indigo-900"
+          onClick={() => onStart('goi')}
+          className="bg-indigo-600 hover:bg-indigo-500 transition-all rounded-2xl p-6 text-left shadow-xl group"
         >
-          Mulai Latihan →
+          <div className="flex items-center gap-4">
+            <span className="text-4xl">📖</span>
+            <div>
+              <h2 className="text-xl font-bold text-white">Latihan Goi</h2>
+              <p className="text-indigo-200 text-sm mt-1">
+                Kosakata — JP↔ID · {totalGoi} kata tersedia
+              </p>
+            </div>
+          </div>
         </button>
+
+        {/* Kanji Mode */}
+        <button
+          onClick={() => onStart('kanji')}
+          className="bg-rose-600 hover:bg-rose-500 transition-all rounded-2xl p-6 text-left shadow-xl group"
+        >
+          <div className="flex items-center gap-4">
+            <span className="text-4xl">漢</span>
+            <div>
+              <h2 className="text-xl font-bold text-white">Latihan Kanji</h2>
+              <p className="text-rose-200 text-sm mt-1">
+                Kanji ↔ Furigana · {totalKanji} kanji tersedia
+              </p>
+            </div>
+          </div>
+        </button>
+      </div>
+
+      <div className="text-slate-500 text-sm">
+        50 soal · Timer 25 menit · Jawaban diacak
       </div>
     </div>
   );
