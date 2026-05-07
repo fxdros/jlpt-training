@@ -23,7 +23,7 @@ export default function Timer({ duration, onTimeUp }: Props) {
 
   const minutes = Math.floor(timeLeft / 60);
   const seconds = timeLeft % 60;
-  const isWarning = timeLeft <= 300;
+  const isWarning = timeLeft <= 120;
   const isDanger = timeLeft <= 60;
 
   return (
