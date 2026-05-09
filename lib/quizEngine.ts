@@ -61,7 +61,7 @@ export function generateGoiSession(
 ): QuizSession {
   const seed = sessionIndex * 999983 + Math.floor(Math.random() * 1000000);
   const shuffled = seededShuffle(vocabulary, seed);
-  const selected = shuffled.slice(0, 200);
+  const selected = shuffled.slice(0, 20);
 
   const questions: Question[] = selected.map((item, idx) => {
     const type: QuestionType =
@@ -115,7 +115,7 @@ export function generateKanjiSession(
 ): QuizSession {
   const seed = sessionIndex * 999983 + Math.floor(Math.random() * 1000000);
   const shuffled = seededShuffle(kanjiList, seed);
-  const selected = shuffled.slice(0, 200);
+  const selected = shuffled.slice(0, 20);
 
   const questions: Question[] = selected.map((item, idx) => {
     const type: QuestionType =
