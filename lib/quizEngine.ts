@@ -59,7 +59,7 @@ export function generateGoiSession(
   vocabulary: GoiItem[],
   sessionIndex: number
 ): QuizSession {
-  const seed = Date.now() + sessionIndex * 999983 + Math.floor(Math.random() * 1000000);
+  const seed = sessionIndex * 999983 + Math.floor(Math.random() * 1000000);
   const shuffled = seededShuffle(vocabulary, seed);
   const selected = shuffled.slice(0, 200);
 
@@ -113,7 +113,7 @@ export function generateKanjiSession(
   kanjiList: KanjiItem[],
   sessionIndex: number
 ): QuizSession {
-  const seed = Date.now() + sessionIndex * 999983 + Math.floor(Math.random() * 1000000);
+  const seed = sessionIndex * 999983 + Math.floor(Math.random() * 1000000);
   const shuffled = seededShuffle(kanjiList, seed);
   const selected = shuffled.slice(0, 200);
 

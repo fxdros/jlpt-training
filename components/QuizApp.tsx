@@ -33,7 +33,7 @@ export default function QuizApp({ goiVocab, kanjiList }: Props) {
             <span className="text-slate-400 text-sm">
               Soal {currentIndex + 1} / {questions.length}
             </span>
-            <Timer duration={25 * 60} onTimeUp={finishQuiz} />
+            <Timer duration={5 * 60} onTimeUp={finishQuiz} />
           </div>
 
           <div className="w-full bg-slate-700 rounded-full h-2">
