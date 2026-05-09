@@ -21,8 +21,8 @@ export function parseGoiCSV(csvText: string): GoiItem[] {
         reading: parts[1]?.trim() ?? '',
         meaning: parts[2]?.trim() ?? '',
       };
-    })
-    .filter((item) => item.reading && item.meaning);
+    }
+  )
 }
 
 export function parseKanjiCSV(csvText: string): KanjiItem[] {
@@ -36,6 +36,6 @@ export function parseKanjiCSV(csvText: string): KanjiItem[] {
         kanji: kanji?.trim() ?? '',
         reading: reading?.trim() ?? '',
       };
-    })
-    .filter((item) => item.kanji && item.reading);
+    }
+  )
 }
