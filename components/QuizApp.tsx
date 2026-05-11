@@ -2,7 +2,6 @@
 
 import { GoiItem, KanjiItem } from '@/lib/csvParser';
 import { useQuiz } from '@/lib/useQuiz';
-import { QuizMode } from '@/lib/quizEngine';
 import StartScreen from './StartScreen';
 import QuestionCard from './QuestionCard';
 import ResultScreen from './ResultScreen';

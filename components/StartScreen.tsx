@@ -13,7 +13,7 @@ export default function StartScreen({ onStart, totalGoi, totalKanji }: Props) {
     <div className="flex flex-col items-center gap-8 text-center max-w-lg w-full">
       <div>
         <h1 className="text-4xl font-bold text-white mb-2">JLPT N2 Quiz</h1>
-        <p className="text-slate-400">Pilih mode latihan yang ingin kamu mulai</p>
+        <p className="text-slate-400">Choose your practice mode</p>
       </div>
 
       <div className="grid grid-cols-1 gap-4 w-full">
@@ -25,9 +25,9 @@ export default function StartScreen({ onStart, totalGoi, totalKanji }: Props) {
           <div className="flex items-center gap-4">
             <span className="text-4xl">📖</span>
             <div>
-              <h2 className="text-xl font-bold text-white">Latihan Goi</h2>
+              <h2 className="text-xl font-bold text-white">Vocabulary Practice</h2>
               <p className="text-indigo-200 text-sm mt-1">
-                Kosakata — JP↔ID · {totalGoi} kata tersedia
+                Vocabulary — JP↔EN · {totalGoi} words available
               </p>
             </div>
           </div>
@@ -41,9 +41,9 @@ export default function StartScreen({ onStart, totalGoi, totalKanji }: Props) {
           <div className="flex items-center gap-4">
             <span className="text-4xl">漢</span>
             <div>
-              <h2 className="text-xl font-bold text-white">Latihan Kanji</h2>
+              <h2 className="text-xl font-bold text-white">Kanji Practice</h2>
               <p className="text-rose-200 text-sm mt-1">
-                Kanji ↔ Furigana · {totalKanji} kanji tersedia
+                Kanji ↔ Furigana · {totalKanji} kanji available
               </p>
             </div>
           </div>
@@ -51,7 +51,7 @@ export default function StartScreen({ onStart, totalGoi, totalKanji }: Props) {
       </div>
 
       <div className="text-slate-500 text-sm">
-        50 soal · Timer 25 menit · Jawaban diacak
+        25 Questions · 5 Minutes
       </div>
     </div>
   );
