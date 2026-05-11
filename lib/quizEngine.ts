@@ -1,7 +1,7 @@
 import { GoiItem, KanjiItem } from './csvParser';
 
 export type QuizMode = 'goi' | 'kanji';
-export type QuestionType = 'jp-to-id' | 'id-to-jp' | 'kanji-to-reading' | 'reading-to-kanji';
+export type QuestionType = 'jp-to-en' | 'en-to-jp' | 'kanji-to-reading' | 'reading-to-kanji';
 
 export interface Choice {
   label: 'A' | 'B' | 'C' | 'D';
@@ -61,20 +61,20 @@ export function generateGoiSession(
 ): QuizSession {
   const seed = sessionIndex * 999983 + Math.floor(Math.random() * 1000000);
   const shuffled = seededShuffle(vocabulary, seed);
-  const selected = shuffled.slice(0, 20);
+  const selected = shuffled.slice(0, 25);
 
   const questions: Question[] = selected.map((item, idx) => {
     const type: QuestionType =
-      Math.random() < 0.5 ? 'jp-to-id' : 'id-to-jp';
+      Math.random() < 0.5 ? 'jp-to-en' : 'en-to-jp';
 
-    const displayWord = item.word
+    const displayWord = item.word && item.reading
       ? `${item.word}（${item.reading}）`
-      : item.reading;
+      : item.word;
 
     let prompt: string;
     let correctAnswer: string;
 
-    if (type === 'jp-to-id') {
+    if (type === 'jp-to-en') {
       prompt = displayWord;
       correctAnswer = item.meaning;
     } else {
@@ -85,8 +85,8 @@ export function generateGoiSession(
     const otherVocab = shuffled.filter((v) => v.reading !== item.reading);
     const wrongPool = randomShuffle(otherVocab).slice(0, 3);
     const wrongChoices = wrongPool.map((v) => {
-      if (type === 'jp-to-id') return v.meaning;
-      return v.word ? `${v.word}（${v.reading}）` : v.reading;
+      if (type === 'jp-to-en') return v.meaning;
+      return v.word && v.reading ? `${v.word}（${v.reading}）` : v.word;
     });
 
     const allChoices = randomShuffle([correctAnswer, ...wrongChoices]);
@@ -115,7 +115,7 @@ export function generateKanjiSession(
 ): QuizSession {
   const seed = sessionIndex * 999983 + Math.floor(Math.random() * 1000000);
   const shuffled = seededShuffle(kanjiList, seed);
-  const selected = shuffled.slice(0, 20);
+  const selected = shuffled.slice(0, 25);
 
   const questions: Question[] = selected.map((item, idx) => {
     const type: QuestionType =

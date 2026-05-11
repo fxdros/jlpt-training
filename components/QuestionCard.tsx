@@ -16,8 +16,8 @@ const LABEL_COLORS: Record<string, string> = {
 
 function getTypeLabel(type: Question['type']): string {
   switch (type) {
-    case 'jp-to-id': return 'Apa arti dari kata berikut?';
-    case 'id-to-jp': return 'Pilih kata Jepang yang sesuai:';
+    case 'jp-to-en': return 'What is the meaning of this word?';
+    case 'en-to-jp': return 'Choose the correct word:';
     case 'kanji-to-reading': return 'Bagaimana cara membaca kanji berikut?';
     case 'reading-to-kanji': return 'Pilih kanji yang sesuai dengan bacaan berikut:';
   }
